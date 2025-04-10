@@ -1,738 +1,1581 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shrine Crypto Casino | Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <title>Shrine Crypto Casino | Bitcoin & Crypto Gambling</title>
+
+    <link rel="stylesheet" href="
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
+
         :root {
+
             --primary: #6a1b9a;
+
             --secondary: #ffd740;
+
             --accent: #00e676;
+
             --dark: #0a0a0a;
+
             --darker: #050505;
+
             --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+
             --glass: rgba(255,255,255,0.05);
+
             --hero-bg: #1a0a2b;
+
+            --games-bg: #0d0d2b;
+
+            --crypto-bg: #0a2b1a;
+
         }
 
         * {
+
             margin: 0;
+
             padding: 0;
+
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+
+            ;
+
         }
 
         body {
+
             background: var(--darker);
-            color: #fff;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(106, 27, 154, 0.15) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 230, 118, 0.15) 0%, transparent 20%);
+
+            ;
+
+            overflow-x: hidden;
+
         }
 
-        .bg-particles {
-            position: absolute;
+        .top-container {
+
+            position: fixed;
+
             top: 0;
-            left: 0;
+
             width: 100%;
-            height: 100%;
-            z-index: -1;
+
+            z-index: 1000;
+
+        }
+
+        .announcement-bar {
+
+            background: var(--gradient);
+
+            ;
+
+            padding: 12px 0;
+
             overflow: hidden;
+
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+
         }
 
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(255, 215, 64, 0.5);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
+        .marquee-container {
 
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(100px);
-                opacity: 0;
-            }
-        }
+            display: flex;
 
-        .login-container {
             width: 100%;
-            max-width: 450px;
-            background: rgba(10, 10, 10, 0.8);
+
+        }
+
+        .marquee-content {
+
+            white-space: nowrap;
+
+            animation: marquee 20s linear infinite;
+
+            padding-right: 100%;
+
+        }
+
+        @keyframes marquee {
+
+            0% { transform: translateX(100%); }
+
+            100% { transform: translateX(-100%); }
+
+        }
+
+        header {
+
+            background: rgba(10,10,10,0.95);
+
             backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 
-                0 25px 50px -12px rgba(0, 0, 0, 0.5),
-                inset 0 0 15px rgba(106, 27, 154, 0.3);
-            border: 1px solid rgba(106, 27, 154, 0.3);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            animation: float 6s ease-in-out infinite;
-        }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
-            50% { transform: translateY(-20px) rotateX(2deg) rotateY(2deg); }
-        }
+            padding: 1rem 2rem;
 
-        .login-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(106, 27, 154, 0.1),
-                rgba(106, 27, 154, 0),
-                rgba(0, 230, 118, 0.1)
-            );
-            transform: rotate(45deg);
-            z-index: -1;
-            animation: shine 8s infinite;
-        }
+            display: flex;
 
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
-        }
+            justify-content: space-between;
 
-        .login-container::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 20px;
-            padding: 2px;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            -webkit-mask: 
-                linear-gradient(#fff 0 0) content-box, 
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            z-index: -1;
+            align-items: center;
+
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+
+            gap: 2rem;
+
         }
 
         .logo {
-            text-align: center;
-            margin-bottom: 2.5rem;
-            font-size: 2.5rem;
+
+            ;
+
             font-weight: 800;
+
             background: linear-gradient(45deg, var(--secondary), var(--accent));
+
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(255, 215, 64, 0.3);
+
+            ;
+
+            flex-shrink: 0;
+
+        }
+
+        .nav-links {
+
+            display: flex;
+
+            gap: 2.5rem;
+
+            align-items: center;
+
+            flex: 1;
+
+            justify-content: center;
+
+        }
+
+        .nav-links a {
+
+            ;
+
+            text-decoration: none;
+
             position: relative;
-            display: inline-block;
-            width: 100%;
-        }
 
-        .logo::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--gradient);
-            border-radius: 3px;
-        }
+            padding: 0.5rem 0;
 
-        .welcome-text {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .welcome-text h2 {
-            font-size: 1.8rem;
-            margin-bottom: 0.8rem;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .welcome-text p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1rem;
-            line-height: 1.6;
-            max-width: 80%;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 1.8rem;
-            position: relative;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.8rem;
-            color: var(--secondary);
-            font-size: 0.95rem;
             font-weight: 500;
-            letter-spacing: 0.5px;
+
+            transition: color 0.3s;
+
+            flex-shrink: 0;
+
         }
 
-        .form-group input {
-            width: 100%;
-            padding: 1.2rem 1.5rem;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(106, 27, 154, 0.5);
-            border-radius: 12px;
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s ease-out;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
+        .nav-links a::after {
 
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 
-                0 0 0 3px rgba(0, 230, 118, 0.2),
-                0 5px 15px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.12);
-        }
+            content: '';
 
-        .form-group .input-icon {
             position: absolute;
-            right: 20px;
-            top: 50px;
-            color: rgba(255, 255, 255, 0.5);
-            transition: all 0.3s;
+
+            width: 0;
+
+            height: 2px;
+
+            bottom: 0;
+
+            left: 0;
+
+            background: var(--secondary);
+
+            transition: width 0.3s;
+
         }
 
-        .form-group input:focus + .input-icon {
-            color: var(--accent);
-            transform: scale(1.1);
+        .nav-links a:hover::after {
+
+            width: 100%;
+
+        }
+
+        .auth-buttons {
+
+            display: flex;
+
+            gap: 1rem;
+
+            flex-wrap: nowrap;
+
+            flex-shrink: 0;
+
+            justify-content: center; /* Added center alignment */
+
         }
 
         .btn {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            border: none;
+
+            padding: 0.8rem 1.8rem;
+
+            border-radius: 50px;
+
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+
             cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+
+            transition: all 0.3s;
+
+            position: relative;
+
+            overflow: hidden;
+
+            border: none;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            min-width: 120px;
+
         }
 
         .btn-primary {
-            width: 100%;
-            padding: 1.2rem;
-            border-radius: 12px;
-            font-size: 1rem;
-            background: var(--gradient);
-            color: white;
-        }
 
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, var(--accent), var(--primary));
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            z-index: -1;
+            background: var(--primary);
+
+            ;
+
+            box-shadow: 0 0 25px rgba(106,27,154,0.5);
+
+            border: 2px solid var(--secondary);
+
         }
 
         .btn-primary:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 8px 25px rgba(106,27,154,0.5);
-        }
 
-        .btn-primary:hover::before {
-            opacity: 1;
-        }
+            animation: btnGlow 1.5s ease-in-out infinite;
 
-        .btn-primary:active {
-            transform: translateY(-2px) scale(1.01);
+            transform: translateY(-3px);
+
         }
 
         .btn-secondary {
+
             background: transparent;
-            color: var(--secondary);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            border: 2px solid var(--secondary);
-            font-size: 0.9rem;
-            transition: all 0.3s;
+
+            border: 2px solid var(--primary);
+
+            ;
+
         }
 
         .btn-secondary:hover {
-            background: rgba(255,215,64,0.1);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255,215,64,0.2);
+
+            background: rgba(106,27,154,0.2);
+
         }
 
-        .remember-forgot {
+        @keyframes btnGlow {
+
+            0%, 100% { box-shadow: 0 0 25px rgba(106,27,154,0.5); }
+
+            50% { box-shadow: 0 0 40px rgba(106,27,154,0.8); }
+
+        }
+
+        main {
+
+            margin-top: 140px;
+
+            padding: 2rem;
+
+        }
+
+        .hero-section {
+
+            min-height: 90vh;
+
             display: flex;
-            justify-content: space-between;
+
             align-items: center;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-        }
 
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .remember-me input {
-            accent-color: var(--primary);
-            width: 16px;
-            height: 16px;
-        }
-
-        .forgot-password {
-            color: var(--secondary);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .forgot-password:hover {
-            color: var(--accent);
-            text-decoration: underline;
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 2.5rem 0;
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .divider::before, .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(
-                to right,
-                transparent,
-                rgba(106, 27, 154, 0.5),
-                transparent
-            );
-            margin: 0 1.5rem;
-        }
-
-        .social-login {
-            display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
 
-        .social-btn {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease-out;
-            font-size: 1.3rem;
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .social-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                45deg,
-                rgba(255, 255, 255, 0.1),
-                rgba(255, 255, 255, 0)
-            );
-            transform: translateX(-100%);
-            transition: transform 0.4s;
-        }
-
-        .social-btn:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .social-btn:hover::before {
-            transform: translateX(100%);
-        }
-
-        .social-btn.google { color: #DB4437; }
-        .social-btn.twitter { color: #1DA1F2; }
-        .social-btn.discord { color: #5865F2; }
-
-        .register-link {
             text-align: center;
-            margin-top: 2rem;
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
 
-        .register-link a {
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 600;
-            margin-left: 0.5rem;
-            transition: all 0.3s;
+            padding: 4rem 2rem;
+
             position: relative;
+
+            background: var(--hero-bg);
+
+            border-bottom: 3px solid var(--primary);
+
         }
 
-        .register-link a::after {
+        .hero-content {
+
+            max-width: 1200px;
+
+            position: relative;
+
+            z-index: 1;
+
+        }
+
+        .hero-title {
+
+            ;
+
+            margin-bottom: 1.5rem;
+
+            background: linear-gradient(45deg, #fff, var(--secondary));
+
+            -webkit-background-clip: text;
+
+            ;
+
+            text-shadow: 0 0 30px rgba(255,215,64,0.3);
+
+        }
+
+        .hero-subtitle {
+
+            ;
+
+            ;
+
+            margin-bottom: 3rem;
+
+            line-height: 1.6;
+
+        }
+
+        .games-section {
+
+            padding: 6rem 2rem;
+
+            background: var(--games-bg);
+
+            border-bottom: 3px solid var(--primary);
+
+        }
+
+        .section-title {
+
+            text-align: center;
+
+            ;
+
+            margin-bottom: 4rem;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            position: relative;
+
+            padding-bottom: 1.5rem;
+
+        }
+
+        .section-title::after {
+
             content: '';
+
             position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s;
+
+            bottom: 0;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: 120px;
+
+            height: 3px;
+
+            background: var(--secondary);
+
         }
 
-        .register-link a:hover {
-            color: var(--accent);
+        .games-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 3rem;
+
+            max-width: 1400px;
+
+            margin: 0 auto;
+
         }
 
-        .register-link a:hover::after {
-            width: 100%;
+        .game-card {
+
+            background: var(--glass);
+
+            border-radius: 20px;
+
+            padding: 2.5rem;
+
+            text-align: center;
+
+            transition: all 0.3s;
+
+            border: 1px solid rgba(255,255,255,0.1);
+
+            position: relative;
+
+            overflow: hidden;
+
+            backdrop-filter: blur(10px);
+
         }
 
-        .error-message {
-            color: #ff5252;
-            font-size: 0.85rem;
-            margin-top: 0.8rem;
-            display: none;
-            padding-left: 0.5rem;
-            animation: shake 0.5s;
-        }
+        .game-card::before {
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-5px); }
-            40%, 80% { transform: translateX(5px); }
-        }
+            content: '';
 
-        .btn-ripple {
             position: absolute;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.4);
-            transform: scale(0);
-            animation: ripple 0.6s linear;
+
+            top: -50%;
+
+            left: -50%;
+
+            width: 200%;
+
+            height: 200%;
+
+            background: linear-gradient(45deg, transparent, rgba(255,215,64,0.1), transparent);
+
+            transform: rotate(45deg);
+
             pointer-events: none;
+
         }
 
-        @keyframes ripple {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
+        .game-card:hover {
+
+            transform: translateY(-10px);
+
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+
         }
 
-        .crypto-floater {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 215, 64, 0.1);
+        .game-icon {
+
+            width: 120px;
+
+            height: 120px;
+
+            margin: 0 auto 2rem;
+
+            background: rgba(255,255,255,0.1);
+
+            border-radius: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            ;
+
+            ;
+
+            transition: transform 0.3s;
+
+            position: relative;
+
+        }
+
+        .game-card:hover .game-icon {
+
+            transform: scale(1.1);
+
+        }
+
+        .game-title {
+
+            ;
+
+            margin-bottom: 1.5rem;
+
+            letter-spacing: 1px;
+
+        }
+
+        .game-stats {
+
+            display: flex;
+
+            justify-content: space-around;
+
+            margin: 2.5rem 0;
+
+            gap: 1rem;
+
+        }
+
+        .stat-item {
+
+            text-align: center;
+
+            padding: 1rem;
+
+            background: rgba(0,0,0,0.3);
+
+            border-radius: 10px;
+
+            flex: 1;
+
+        }
+
+        .stat-value {
+
+            ;
+
+            ;
+
+            font-weight: 700;
+
+            ;
+
+            transition: all 0.3s;
+
+        }
+
+        .stat-label {
+
+            ;
+
+            ;
+
+            margin-top: 0.5rem;
+
+            display: block;
+
+        }
+
+        .crypto-section {
+
+            padding: 6rem 2rem;
+
+            background: var(--crypto-bg);
+
+            border-bottom: 3px solid var(--primary);
+
+        }
+
+        .crypto-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 2rem;
+
+            max-width: 1400px;
+
+            margin: 0 auto;
+
+        }
+
+        .crypto-card {
+
+            background: var(--glass);
+
+            padding: 2rem;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            transition: transform 0.3s;
+
+            backdrop-filter: blur(10px);
+
+            border: 1px solid rgba(255,255,255,0.1);
+
+        }
+
+        .crypto-card:hover {
+
+            transform: translateY(-10px);
+
+        }
+
+        .crypto-icon {
+
+            width: 80px;
+
+            height: 80px;
+
+            margin: 0 auto 1.5rem;
+
+            filter: drop-shadow(0 0 10px rgba(255,215,64,0.3));
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            ;
+
+            ;
+
+        }
+
+        .vip-section {
+
+            padding: 6rem 2rem;
+
+            background: #1a0a1a;
+
+            border-bottom: 3px solid var(--primary);
+
+        }
+
+        .vip-tiers {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 3rem;
+
+            max-width: 1400px;
+
+            margin: 0 auto;
+
+        }
+
+        .vip-card {
+
+            background: var(--glass);
+
+            padding: 2.5rem;
+
+            border-radius: 20px;
+
+            text-align: center;
+
+            position: relative;
+
+            overflow: hidden;
+
+            backdrop-filter: blur(10px);
+
+        }
+
+        .vip-badge {
+
+            width: 80px;
+
+            height: 80px;
+
+            margin: 0 auto 1.5rem;
+
+            background: var(--gradient);
+
             border-radius: 50%;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
-            font-size: 1.2rem;
-            color: var(--secondary);
-            animation: float-up 15s linear infinite;
+
+            ;
+
+        }
+
+        .bonuses-section {
+
+            padding: 6rem 2rem;
+
+            background: #0a2b2b;
+
+            border-bottom: 3px solid var(--primary);
+
+        }
+
+        .bonus-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 3rem;
+
+            max-width: 1400px;
+
+            margin: 0 auto;
+
+        }
+
+        .bonus-card {
+
+            background: var(--glass);
+
+            padding: 2.5rem;
+
+            border-radius: 20px;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+        .bonus-amount {
+
+            ;
+
+            ;
+
+            margin: 1rem 0;
+
+        }
+
+        .leaderboard-section {
+
+            padding: 6rem 2rem;
+
+            background: #2b0a0a;
+
+            border-bottom: 3px solid var(--primary);
+
+        }
+
+        .leaderboard-table {
+
+            max-width: 1000px;
+
+            margin: 0 auto;
+
+            background: var(--glass);
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+        }
+
+        .leaderboard-row {
+
+            display: flex;
+
+            padding: 1.2rem 2rem;
+
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+
+        }
+
+        .leaderboard-header {
+
+            background: var(--primary);
+
+            font-weight: 700;
+
+        }
+
+        .rank-cell {
+
+            width: 15%;
+
+            font-weight: 700;
+
+        }
+
+        .player-cell {
+
+            width: 45%;
+
+        }
+
+        .amount-cell {
+
+            width: 40%;
+
+            text-align: right;
+
+            ;
+
+        }
+
+        .support-section {
+
+            padding: 6rem 2rem;
+
+            background: #0a1a2b;
+
+        }
+
+        .support-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 4rem;
+
+            max-width: 1400px;
+
+            margin: 0 auto;
+
+        }
+
+        .live-wins {
+
+            position: fixed;
+
+            bottom: 30px;
+
+            right: 30px;
+
+            max-width: 350px;
+
+            z-index: 1000;
+
+            overflow: hidden;
+
+        }
+
+        .win-notification {
+
+            background: rgba(0,0,0,0.9);
+
+            padding: 1rem;
+
+            border-radius: 12px;
+
+            margin: 0.5rem 0;
+
+            border: 1px solid var(--primary);
+
+            transform: translateX(120%);
+
+            animation: slideInOut 5s forwards;
+
+            position: absolute;
+
+            right: 0;
+
+            width: 100%;
+
             opacity: 0;
-            z-index: -1;
-            box-shadow: 0 0 10px rgba(255, 215, 64, 0.2);
+
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+
+            backdrop-filter: blur(5px);
+
         }
 
-        @keyframes float-up {
-            0% {
-                transform: translateY(100vh) rotate(0deg) scale(0.8);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg) scale(1.2);
-                opacity: 0;
-            }
+        @keyframes slideInOut {
+
+            0% { transform: translateX(120%); opacity: 0; }
+
+            15% { transform: translateX(0); opacity: 1; }
+
+            85% { transform: translateX(0); opacity: 1; }
+
+            100% { transform: translateX(120%); opacity: 0; }
+
         }
 
-        .security-badges {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 2.5rem;
-            flex-wrap: wrap;
+        .progress-bar {
+
+            height: 3px;
+
+            background: var(--primary);
+
+            width: 0%;
+
+            animation: progress 4s linear forwards;
+
+            margin-bottom: 0.5rem;
+
         }
 
-        .badge {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.6);
+        @keyframes progress {
+
+            from { width: 0%; }
+
+            to { width: 100%; }
+
         }
 
-        .badge i {
-            color: var(--accent);
-            font-size: 1rem;
+        @media (max-width: 1024px) {
+
+            .nav-links { gap: 1.5rem; }
+
+            .vip-tiers { grid-template-columns: 1fr; }
+
+            .bonus-grid { grid-template-columns: 1fr; }
+
         }
 
         @media (max-width: 768px) {
-            .login-container {
-                padding: 2.5rem;
-                margin: 1.5rem;
-            }
 
-            .logo {
-                font-size: 2.2rem;
-            }
+            .games-grid { grid-template-columns: 1fr; }
 
-            .welcome-text h2 {
-                font-size: 1.6rem;
-            }
+            .hero-title { ; }
 
-            .form-group input {
-                padding: 1rem 1.2rem;
-            }
+            .nav-links { display: none; }
 
-            .social-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 1.1rem;
-            }
+            .stat-value { ; }
+
+            .game-card { padding: 1.5rem; }
+
+            .auth-buttons { margin-left: auto; }
+
+            .btn { padding: 0.6rem 1.2rem; }
+
+            .support-grid { grid-template-columns: 1fr; }
+
         }
 
         @media (max-width: 480px) {
-            .login-container {
-                padding: 2rem 1.5rem;
-            }
 
-            .logo {
-                font-size: 2rem;
-                margin-bottom: 1.5rem;
-            }
+            .hero-title { ; }
 
-            .welcome-text h2 {
-                font-size: 1.4rem;
-            }
+            .section-title { ; }
 
-            .welcome-text p {
-                font-size: 0.9rem;
-            }
+            .game-icon { width: 80px; height: 80px; }
 
-            .divider {
-                margin: 2rem 0;
-            }
+            .top-container { position: static; }
 
-            .social-login {
-                gap: 1rem;
-                margin-bottom: 2rem;
-            }
+            header { flex-wrap: wrap; padding: 1rem; }
 
-            .btn {
-                padding: 1rem;
-            }
+            .auth-buttons { order: 2; width: 100%; }
+
+            .btn { width: 45%; }
+
         }
+
     </style>
+
 </head>
+
 <body>
-    <!-- Floating background particles -->
-    <div class="bg-particles" id="particles"></div>
-    
-    <!-- Floating crypto elements -->
-    <div id="crypto-float-container"></div>
 
-    <!-- Main login container -->
-    <div class="login-container">
-        <h1 class="logo">SHRINE CASINO</h1>
-        
-        <div class="welcome-text">
-            <h2>Welcome Back, High Roller</h2>
-            <p>Login to access your VIP account and claim your daily rewards</p>
+    <div class="top-container">
+
+        <div class="announcement-bar">
+
+            <div class="marquee-container">
+
+                <div class="marquee-content">
+
+                    🚀 300% WELCOME BONUS • INSTANT WITHDRAWALS • PROVABLY FAIR GAMES • 24/7 LIVE SUPPORT 🚀
+
+                    🚀 300% WELCOME BONUS • INSTANT WITHDRAWALS • PROVABLY FAIR GAMES • 24/7 LIVE SUPPORT 🚀
+
+                </div>
+
+            </div>
+
         </div>
 
-        <form id="login-form">
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="your@email.com" required>
-                <i class="fas fa-envelope input-icon"></i>
-                <div class="error-message" id="email-error"></div>
+        <header>
+
+            <div class="logo">SHRINE CASINO</div>
+
+            <nav class="nav-links">
+
+                <a href="#games">Games</a>
+
+                <a href="#vip">VIP</a>
+
+                <a href="#bonuses">Bonuses</a>
+
+                <a href="#leaderboard">Leaderboard</a>
+
+                <a href="#support">Support</a>
+
+            </nav>
+
+            <div class="auth-buttons">
+
+                <button class="btn btn-primary">SIGN UP</button>
+
+                <button class="btn btn-secondary">LOGIN</button>
+
             </div>
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="••••••••" required minlength="6">
-                <i class="fas fa-lock input-icon"></i>
-                <div class="error-message" id="password-error"></div>
-            </div>
+        </header>
 
-            <div class="remember-forgot">
-                <label class="remember-me">
-                    <input type="checkbox" id="remember-me">
-                    Remember me
-                </label>
-                <a href="#" class="forgot-password" id="forgot-password">Forgot password?</a>
-            </div>
-
-            <button type="submit" class="btn btn-primary" id="login-btn">
-                <span class="btn-content">LOGIN</span>
-            </button>
-        </form>
-
-        <div class="divider">Or Connect With</div>
-
-        <div class="social-login">
-            <div class="social-btn google" id="google-login">
-                <i class="fab fa-google"></i>
-            </div>
-            <div class="social-btn twitter" id="twitter-login">
-                <i class="fab fa-twitter"></i>
-            </div>
-            <div class="social-btn discord" id="discord-login">
-                <i class="fab fa-discord"></i>
-            </div>
-        </div>
-
-        <div class="register-link">
-            New to Shrine Casino? 
-            <a href="register.html" class="btn btn-secondary" id="register-link">Create Account</a>
-        </div>
-
-        <div class="security-badges">
-            <div class="badge">
-                <i class="fas fa-lock"></i>
-                <span>256-bit SSL</span>
-            </div>
-            <div class="badge">
-                <i class="fas fa-shield-alt"></i>
-                <span>Fair</span>
-            </div>
-            <div class="badge">
-                <i class="fas fa-user-secret"></i>
-                <span>Anonymous</span>
-            </div>
-        </div>
     </div>
 
+    <main>
+
+        <section class="hero-section">
+
+            <div class="hero-content">
+
+                <h1 class="hero-title">The Ultimate Crypto Gambling Experience</h1>
+
+                <p class="hero-subtitle">Play with Bitcoin, Ethereum, Monero, Solana and more</p>
+
+                <div class="auth-buttons">
+
+                    <button class="btn btn-primary">GET STARTED</button>
+
+                    <button class="btn btn-secondary">LEARN MORE</button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="games-section" id="games">
+
+            <h2 class="section-title">Featured Games</h2>
+
+            <div class="games-grid">
+
+                <!-- Mines Game -->
+
+                <div class="game-card" data-aos="fade-up">
+
+                    <div class="game-icon"><i class="fas fa-bomb"></i></div>
+
+                    <h3 class="game-title">Mines</h3>
+
+                    <div class="game-stats">
+
+                        <div class="stat-item">
+
+                            <div class="stat-value" data-base="25480">$25,480</div>
+
+                            <span class="stat-label">Won Today</span>
+
+                        </div>
+
+                        <div class="stat-item">
+
+                            <div class="stat-value" data-base="2345">2,345</div>
+
+                            <span class="stat-label">Players Online</span>
+
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-primary">PLAY NOW</button>
+
+                </div>
+
+                <!-- Plinko Game -->
+
+                <div class="game-card" data-aos="fade-up" data-aos-delay="100">
+
+                    <div class="game-icon"><i class="fas fa-circle-nodes"></i></div>
+
+                    <h3 class="game-title">Plinko</h3>
+
+                    <div class="game-stats">
+
+                        <div class="stat-item">
+
+                            <div class="stat-value" data-base="18750">$18,750</div>
+
+                            <span class="stat-label">Won Today</span>
+
+                        </div>
+
+                        <div class="stat-item">
+
+                            <div class="stat-value" data-base="1892">1,892</div>
+
+                            <span class="stat-label">Players Online</span>
+
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-primary">PLAY NOW</button>
+
+                </div>
+
+                <!-- Dice Game -->
+
+                <div class="game-card" data-aos="fade-up" data-aos-delay="200">
+
+                    <div class="game-icon"><i class="fas fa-dice"></i></div>
+
+                    <h3 class="game-title">Dice</h3>
+
+                    <div class="game-stats">
+
+                        <div class="stat-item">
+
+                            <div class="stat-value" data-base="42300">$42,300</div>
+
+                            <span class="stat-label">Won Today</span>
+
+                        </div>
+
+                        <div class="stat-item">
+
+                            <div class="stat-value" data-base="3102">3,102</div>
+
+                            <span class="stat-label">Players Online</span>
+
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-primary">PLAY NOW</button>
+
+                </div>
+
+                <!-- Blackjack Game -->
+
+                <div class="game-card" data-aos="fade-up" data-aos-delay="300">
+
+                    <div class="game-icon">
+
+                        <i class="fas fa-club"></i>
+
+                        <i class="fas fa-spade" style="position: absolute; transform: rotate(10deg);"></i>
+
+                    </div>
+
+                    <h3 class="game-title">Blackjack</h3>
+
+                    <div class="game-stats">
+
+                        <div class="stat-item">
+
+                            <div class="stat-value" data-base="68900">$68,900</div>
+
+                            <span class="stat-label">Won Today</span>
+
+                        </div>
+
+                        <div class="stat-item">
+
+                            <div class="stat-value" data-base="1234">1,234</div>
+
+                            <span class="stat-label">Players Online</span>
+
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-primary">PLAY NOW</button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="crypto-section" id="crypto">
+
+            <h2 class="section-title">Supported Cryptocurrencies</h2>
+
+            <div class="crypto-grid">
+
+                <div class="crypto-card">
+
+                    <div class="crypto-icon"><i class="fab fa-bitcoin"></i></div>
+
+                    <h3>Bitcoin (BTC)</h3>
+
+                    <p>Instant deposits & withdrawals</p>
+
+                </div>
+
+                <div class="crypto-card">
+
+                    <div class="crypto-icon"><i class="fab fa-ethereum"></i></div>
+
+                    <h3>Ethereum (ETH)</h3>
+
+                    <p>ERC-20 network supported</p>
+
+                </div>
+
+                <div class="crypto-card">
+
+                    <div class="crypto-icon"><i class="fas fa-coins"></i></div>
+
+                    <h3>Monero (XMR)</h3>
+
+                    <p>Private transactions</p>
+
+                </div>
+
+                <div class="crypto-card">
+
+                    <div class="crypto-icon"><i class="fas fa-bolt"></i></div>
+
+                    <h3>Solana (SOL)</h3>
+
+                    <p>High-speed network</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="vip-section" id="vip">
+
+            <h2 class="section-title">VIP Program</h2>
+
+            <div class="vip-tiers">
+
+                <div class="vip-card" data-aos="fade-up">
+
+                    <div class="vip-badge">I</div>
+
+                    <h3>Silver Tier</h3>
+
+                    <p>Daily cashback • Personal account manager • Exclusive bonuses</p>
+
+                </div>
+
+                <div class="vip-card" data-aos="fade-up" data-aos-delay="100">
+
+                    <div class="vip-badge">II</div>
+
+                    <h3>Gold Tier</h3>
+
+                    <p>Weekly rewards • Higher withdrawal limits • Priority support</p>
+
+                </div>
+
+                <div class="vip-card" data-aos="fade-up" data-aos-delay="200">
+
+                    <div class="vip-badge">III</div>
+
+                    <h3>Platinum Tier</h3>
+
+                    <p>Monthly luxury gifts • 1% house edge • VIP events access</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="bonuses-section" id="bonuses">
+
+            <h2 class="section-title">Exclusive Bonuses</h2>
+
+            <div class="bonus-grid">
+
+                <div class="bonus-card" data-aos="fade-right">
+
+                    <h3>Welcome Package</h3>
+
+                    <div class="bonus-amount">300%</div>
+
+                    <p>Up to $3000 + 100 Free Spins</p>
+
+                </div>
+
+                <div class="bonus-card" data-aos="fade-left">
+
+                    <h3>Daily Reload</h3>
+
+                    <div class="bonus-amount">50%</div>
+
+                    <p>Every deposit • No max limit</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="leaderboard-section" id="leaderboard">
+
+            <h2 class="section-title">Top Winners</h2>
+
+            <div class="leaderboard-table">
+
+                <div class="leaderboard-row leaderboard-header">
+
+                    <div class="rank-cell">Rank</div>
+
+                    <div class="player-cell">Player</div>
+
+                    <div class="amount-cell">Amount</div>
+
+                </div>
+
+                <div class="leaderboard-row">
+
+                    <div class="rank-cell">#1</div>
+
+                    <div class="player-cell">CryptoKing***</div>
+
+                    <div class="amount-cell">$42,580</div>
+
+                </div>
+
+                <div class="leaderboard-row">
+
+                    <div class="rank-cell">#2</div>
+
+                    <div class="player-cell">BitQueen***</div>
+
+                    <div class="amount-cell">$38,420</div>
+
+                </div>
+
+                <div class="leaderboard-row">
+
+                    <div class="rank-cell">#3</div>
+
+                    <div class="player-cell">XMRMaster***</div>
+
+                    <div class="amount-cell">$35,150</div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="support-section" id="support">
+
+            <h2 class="section-title">24/7 Support</h2>
+
+            <div class="support-grid">
+
+                <div data-aos="fade-right">
+
+                    <h3>Live Chat</h3>
+
+                    <p>Instant assistance from our support team</p>
+
+                    <button class="btn btn-primary" style="margin-top: 1rem;">START CHAT</button>
+
+                </div>
+
+                <div data-aos="fade-left">
+
+                    <h3>Email Support</h3>
+
+                    <p>support@shrinescasino.com</p>
+
+                    <button class="btn btn-secondary" style="margin-top: 1rem;">SEND EMAIL</button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <div class="live-wins"></div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <script>
-        // Initialize Supabase (unchanged)
-        const supabaseUrl = 'https://unlidgohmymmpxwotjtv.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVubGlkZ29obXltbXB4d290anR2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQyNDIxMzgsImV4cCI6MjA1OTgxODEzOH0.O8kYAwvXh4sAtMj9pSgE3TLjmaq2_WPBPyWuKkFnbYo';
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-    
-        // ... (keep all your existing functions until handleLogin)
-    
-        // ONLY CHANGED FUNCTION - handleLogin
-        async function handleLogin(email, password, rememberMe) {
-            const loginBtn = document.getElementById('login-btn');
-            const originalText = loginBtn.querySelector('.btn-content').textContent;
-            
-            try {
-                loginBtn.querySelector('.btn-content').textContent = 'LOGGING IN...';
-                loginBtn.disabled = true;
+
+        AOS.init({ duration: 1000, once: false, mirror: true });
+
+        const formatter = new Intl.NumberFormat('en-US', {
+
+            style: 'currency',
+
+            currency: 'USD',
+
+            minimumFractionDigits: 0,
+
+            maximumFractionDigits: 0
+
+        });
+
+        function updateNumbers() {
+
+            document.querySelectorAll('.stat-value[data-base]').forEach(el => {
+
+                const isCurrency = el.textContent.includes('$');
+
+                const currentValue = parseInt(el.textContent.replace(/\D/g,''));
+
+                const baseValue = parseInt(el.dataset.base);
+
                 
-                // Check email verification status
-                const { data: { user } } = await supabase.auth.getUser();
-                if (user?.email_confirmed_at === null) {
-                    throw new Error('Please verify your email first');
-                }
-    
-                const { data, error } = await supabase.auth.signInWithPassword({
-                    email,
-                    password
-                });
-                
-                if (error) throw error;
-                
-                // Verify profile exists
-                const { data: profile, error: profileError } = await supabase
-                    .from('profiles')
-                    .select('*')
-                    .eq('user_id', data.user.id)
-                    .single();
-                
-                if (profileError) throw new Error('User profile not found');
-    
-                if (rememberMe) {
-                    await supabase.auth.setSession({
-                        access_token: data.session.access_token,
-                        refresh_token: data.session.refresh_token
-                    });
-                }
-                
-                loginBtn.style.background = 'var(--accent)';
-                setTimeout(() => {
-                    window.location.href = 'dashboard.html';
-                }, 1000);
-                
-            } catch (error) {
-                console.error('Login error:', error);
-                let errorMsg = error.message;
-                if (error.message.includes('Invalid')) errorMsg = 'Invalid email or password';
-                showError(errorMsg);
-                loginBtn.style.animation = 'shake 0.5s';
-            } finally {
-                loginBtn.querySelector('.btn-content').textContent = originalText;
-                loginBtn.disabled = false;
-                loginBtn.style.background = '';
-            }
+
+                const increment = isCurrency 
+
+                    ? Math.floor(Math.random() * 250) + 100
+
+                    : Math.floor(Math.random() * 15) - 2;
+
+                const newValue = currentValue + increment;
+
+                el.textContent = isCurrency 
+
+                    ? formatter.format(newValue)
+
+                    : newValue.toLocaleString();
+
+            });
+
         }
-    
-        // ... (keep all your existing code after this)
+
+        document.querySelectorAll('.stat-value[data-base]').forEach(el => {
+
+            const base = parseInt(el.dataset.base);
+
+            const isCurrency = el.closest('.stat-item').querySelector('.stat-label').textContent === 'Won Today';
+
+            const randomized = base + Math.floor(Math.random() * 5000);
+
+            el.textContent = isCurrency 
+
+                ? formatter.format(randomized)
+
+                : randomized.toLocaleString();
+
+        });
+
+        setInterval(updateNumbers, 3000);
+
+        let notificationQueue = [];
+
+        let isNotificationActive = false;
+
+        function createNotification() {
+
+            const games = ['Mines', 'Plinko', 'Dice', 'Blackjack'];
+
+            const amounts = [
+
+                Math.floor(Math.random() * 5000) + 500 + ' BTC',
+
+                Math.floor(Math.random() * 2000) + 200 + ' ETH',
+
+                Math.floor(Math.random() * 10000) + 1000 + ' XMR',
+
+                Math.floor(Math.random() * 50000) + 5000 + ' SOL'
+
+            ];
+
+            
+
+            return {
+
+                game: games[Math.floor(Math.random() * games.length)],
+
+                amount: amounts[Math.floor(Math.random() * amounts.length)]
+
+            };
+
+        }
+
+        function showNotification() {
+
+            if (isNotificationActive) {
+
+                notificationQueue.push(createNotification());
+
+                return;
+
+            }
+
+            isNotificationActive = true;
+
+            const { game, amount } = createNotification();
+
+            const notification = document.createElement('div');
+
+            notification.className = 'win-notification';
+
+            notification.innerHTML = `
+
+                <div class="progress-bar"></div>
+
+                <p>🎉 User****${Math.floor(Math.random()*90+10)} won ${amount} on ${game}!</p>
+
+            `;
+
+            const container = document.querySelector('.live-wins');
+
+            container.innerHTML = '';
+
+            container.appendChild(notification);
+
+            notification.addEventListener('animationend', () => {
+
+                container.innerHTML = '';
+
+                isNotificationActive = false;
+
+                if (notificationQueue.length > 0) {
+
+                    showNotification();
+
+                    notificationQueue.shift();
+
+                }
+
+            });
+
+        }
+
+        setInterval(showNotification, 8000);
+
+        setTimeout(showNotification, 2000);
+
+        document.querySelectorAll('.btn').forEach(btn => {
+
+            btn.addEventListener('mouseenter', () => {
+
+                btn.style.transform = 'translateY(-3px) scale(1.05)';
+
+            });
+
+            btn.addEventListener('mouseleave', () => {
+
+                btn.style.transform = 'translateY(0) scale(1)';
+
+            });
+
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+            anchor.addEventListener('click', function (e) {
+
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+
+                    behavior: 'smooth'
+
+                });            });
+
+        });
+
     </script>
+
 </body>
+
 </html>
