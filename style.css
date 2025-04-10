@@ -15,10 +15,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
     background: var(--darker);
+    color: white;
     overflow-x: hidden;
 }
 
@@ -45,6 +47,8 @@ body {
     white-space: nowrap;
     animation: marquee 20s linear infinite;
     padding-right: 100%;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
 @keyframes marquee {
@@ -193,6 +197,28 @@ main {
     line-height: 1.6;
 }
 
+.features-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0 3rem;
+    flex-wrap: wrap;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.1);
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 500;
+}
+
+.feature-item i {
+    color: var(--secondary);
+}
+
 .games-section {
     padding: 6rem 2rem;
     background: var(--games-bg);
@@ -207,7 +233,6 @@ main {
     letter-spacing: 2px;
     position: relative;
     padding-bottom: 1.5rem;
-    color: white;
 }
 
 .section-title::after {
@@ -281,7 +306,12 @@ main {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
     letter-spacing: 1px;
-    color: white;
+}
+
+.game-description {
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 1.5rem;
+    min-height: 50px;
 }
 
 .game-stats {
@@ -391,6 +421,15 @@ main {
     font-size: 1.5rem;
 }
 
+.vip-req {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background: rgba(0,0,0,0.3);
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: var(--secondary);
+}
+
 .bonuses-section {
     padding: 6rem 2rem;
     background: #0a2b2b;
@@ -411,12 +450,22 @@ main {
     border-radius: 20px;
     position: relative;
     overflow: hidden;
+    text-align: center;
+    backdrop-filter: blur(10px);
 }
 
 .bonus-amount {
     font-size: 3.5rem;
     color: white;
     margin: 1rem 0;
+    background: linear-gradient(45deg, var(--secondary), var(--accent));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.bonus-card small {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.8rem;
 }
 
 .leaderboard-section {
@@ -431,13 +480,13 @@ main {
     background: var(--glass);
     border-radius: 15px;
     overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
 .leaderboard-row {
     display: flex;
     padding: 1.2rem 2rem;
     border-bottom: 1px solid rgba(255,255,255,0.1);
-    color: white;
 }
 
 .leaderboard-header {
@@ -473,6 +522,50 @@ main {
     margin: 0 auto;
 }
 
+footer {
+    background: #050505;
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.footer-logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(45deg, var(--secondary), var(--accent));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.footer-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--secondary);
+}
+
+.footer-disclaimer {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
 .live-wins {
     position: fixed;
     bottom: 30px;
@@ -496,7 +589,6 @@ main {
     opacity: 0;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     backdrop-filter: blur(5px);
-    color: white;
 }
 
 @keyframes slideInOut {
@@ -523,6 +615,7 @@ main {
     .nav-links { gap: 1.5rem; }
     .vip-tiers { grid-template-columns: 1fr; }
     .bonus-grid { grid-template-columns: 1fr; }
+    .footer-content { grid-template-columns: 1fr; gap: 1.5rem; }
 }
 
 @media (max-width: 768px) {
@@ -544,4 +637,6 @@ main {
     header { flex-wrap: wrap; padding: 1rem; }
     .auth-buttons { order: 2; width: 100%; }
     .btn { width: 45%; }
+    .features-grid { gap: 1rem; }
+    .feature-item { padding: 0.5rem 1rem; font-size: 0.9rem; }
 }
