@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shrine Casino | Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        /* Base styles same as index.html */
+        :root {
+            --primary: #6a1b9a;
+            --secondary: #ffd740;
+            --accent: #00e676;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+            --glass: rgba(255,255,255,0.05);
+            --hero-bg: #1a0a2b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--darker);
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(106, 27, 154, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 230, 118, 0.15) 0%, transparent 20%);
+        }
+
+        /* Background elements same as index.html */
+        .bg-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 215, 64, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+
+        /* Registration container */
+        .register-container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                inset 0 0 15px rgba(106, 27, 154, 0.3);
+            border: 1px solid rgba(106, 27, 154, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateX(2deg) rotateY(2deg); }
+        }
+
+        .register-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(106, 27, 154, 0.1),
+                rgba(106, 27, 154, 0),
+                rgba(0, 230, 118, 0.1)
+            );
+            transform: rotate(45deg);
+            z-index: -1;
+            animation: shine 8s infinite;
+        }
+
+        .register-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Logo and header */
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 215, 64, 0.3);
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
+        }
+
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .welcome-text p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+
+        /* Form styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(106, 27, 154, 0.5);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 230, 118, 0.2);
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Password strength meter */
+        .password-strength {
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            background: #ff5252;
+            transition: all 0.3s;
+        }
+
+        /* Terms checkbox */
+        .terms-check {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .terms-check input {
+            accent-color: var(--primary);
+            width: 18px;
+            height: 18px;
+        }
+
+        .terms-text {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .terms-text a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        /* Buttons (same as index.html) */
+        .btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            border: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 1.2rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(106,27,154,0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 2px solid var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,215,64,0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,215,64,0.2);
+        }
+
+        /* Ripple effect */
+        .btn-ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Error message */
+        .error-message {
+            color: #ff5252;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            display: none;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        /* Login link */
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .login-link a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Security badges */
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .badge i {
+            color: var(--accent);
+            font-size: 1rem;
+        }
+
+        /* Floating crypto coins */
+        .crypto-float {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 215, 64, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--secondary);
+            animation: float-up 15s linear infinite;
+            opacity: 0;
+            z-index: -1;
+            box-shadow: 0 0 10px rgba(255, 215, 64, 0.2);
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .register-container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .welcome-text h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .register-container {
+                padding: 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .form-group input {
+                padding: 0.8rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background particles -->
+    <div class="bg-particles" id="particles"></div>
+    
+    <!-- Floating crypto coins -->
+    <div id="crypto-container"></div>
+
+    <!-- Registration form -->
+    <div class="register-container">
+        <h1 class="logo">SHRINE CASINO</h1>
+        
+        <div class="welcome-text">
+            <h2>Join The VIP Club</h2>
+            <p>Create your account to claim your 300% welcome bonus</p>
+        </div>
+
+        <form id="register-form">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="your@email.com" required>
+                <i class="fas fa-envelope input-icon"></i>
+                <div class="error-message" id="email-error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Choose a username" required minlength="3">
+                <i class="fas fa-user input-icon"></i>
+                <div class="error-message" id="username-error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="••••••••" required minlength="8">
+                <i class="fas fa-lock input-icon"></i>
+                <div class="password-strength">
+                    <div class="strength-bar" id="strength-bar"></div>
+                </div>
+                <div class="error-message" id="password-error"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" placeholder="••••••••" required>
+                <i class="fas fa-lock input-icon"></i>
+                <div class="error-message" id="confirm-error"></div>
+            </div>
+
+            <div class="terms-check">
+                <input type="checkbox" id="terms" required>
+                <label for="terms" class="terms-text">
+                    I agree to the <a href="#">Terms of Service</a> and confirm I am 18+ years old
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="register-btn">
+                <span class="btn-content">CREATE ACCOUNT</span>
+            </button>
+        </form>
+
+        <div class="login-link">
+            Already have an account? <a href="index.html">Login Here</a>
+        </div>
+
+        <div class="security-badges">
+            <div class="badge">
+                <i class="fas fa-lock"></i>
+                <span>256-bit SSL</span>
+            </div>
+            <div class="badge">
+                <i class="fas fa-shield-alt"></i>
+                <span>Provably Fair</span>
+            </div>
+            <div class="badge">
+                <i class="fas fa-user-secret"></i>
+                <span>Anonymous</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Supabase
+        const supabaseUrl = 'https://unlidgohmymmpxwotjtv.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVubGlkZ29obXltbXB4d290anR2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQyNDIxMzgsImV4cCI6MjA1OTgxODEzOH0.O8kYAwvXh4sAtMj9pSgE3TLjmaq2_WPBPyWuKkFnbYo';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // Create background particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.width = `${Math.random() * 3 + 1}px`;
+                particle.style.height = particle.style.width;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                container.appendChild(particle);
+            }
+        }
+
+        // Create floating crypto coins
+        function createCryptoCoins() {
+            const coins = [
+                { icon: 'fab fa-bitcoin', color: '#f7931a' },
+                { icon: 'fab fa-ethereum', color: '#627eea' },
+                { icon: 'fas fa-coins', color: '#ff6600' },
+                { icon: 'fas fa-bolt', color: '#00ffbd' }
+            ];
+            
+            setInterval(() => {
+                const coin = document.createElement('div');
+                coin.className = 'crypto-float';
+                const randomCoin = coins[Math.floor(Math.random() * coins.length)];
+                coin.innerHTML = `<i class="${randomCoin.icon}"></i>`;
+                coin.style.color = randomCoin.color;
+                coin.style.left = `${Math.random() * 100}%`;
+                coin.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                document.getElementById('crypto-container').appendChild(coin);
+                
+                setTimeout(() => {
+                    coin.remove();
+                }, 15000);
+            }, 2000);
+        }
+
+        // Password strength indicator
+        function checkPasswordStrength(password) {
+            const strengthBar = document.getElementById('strength-bar');
+            let strength = 0;
+            
+            if (password.length >= 8) strength += 1;
+            if (password.match(/[a-z]/)) strength += 1;
+            if (password.match(/[A-Z]/)) strength += 1;
+            if (password.match(/[0-9]/)) strength += 1;
+            if (password.match(/[^a-zA-Z0-9]/)) strength += 1;
+            
+            const width = (strength / 5) * 100;
+            strengthBar.style.width = `${width}%`;
+            
+            if (width < 40) {
+                strengthBar.style.background = '#ff5252';
+            } else if (width < 70) {
+                strengthBar.style.background = '#ffb142';
+            } else {
+                strengthBar.style.background = '#2ed573';
+            }
+            
+            return strength;
+        }
+
+        // Add ripple effect to buttons
+        function addRippleEffect() {
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const ripple = document.createElement('span');
+                    ripple.classList.add('btn-ripple');
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        }
+
+        // Handle registration
+        async function handleRegistration(email, username, password) {
+            const registerBtn = document.getElementById('register-btn');
+            const originalText = registerBtn.querySelector('.btn-content').textContent;
+            
+            try {
+                registerBtn.querySelector('.btn-content').textContent = 'CREATING ACCOUNT...';
+                registerBtn.disabled = true;
+                
+                const { data, error } = await supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        data: {
+                            username
+                        }
+                    }
+                });
+                
+                if (error) throw error;
+                
+                // Create user profile
+                const { error: dbError } = await supabase
+                    .from('profiles')
+                    .insert([
+                        { 
+                            user_id: data.user.id, 
+                            email: data.user.email,
+                            username,
+                            balance: 1000,
+                            vip_level: 0
+                        }
+                    ]);
+                
+                if (dbError) throw dbError;
+                
+                registerBtn.style.background = 'var(--accent)';
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Registration error:', error.message);
+                showError(error.message, 'email-error');
+                
+                registerBtn.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    registerBtn.style.animation = '';
+                }, 500);
+                
+            } finally {
+                setTimeout(() => {
+                    registerBtn.querySelector('.btn-content').textContent = originalText;
+                    registerBtn.disabled = false;
+                    registerBtn.style.background = '';
+                }, 2000);
+            }
+        }
+
+        // Show error message
+        function showError(message, elementId = 'email-error') {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            errorElement.style.animation = 'none';
+            void errorElement.offsetWidth;
+            errorElement.style.animation = 'shake 0.5s';
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            createCryptoCoins();
+            addRippleEffect();
+            
+            // Password strength indicator
+            document.getElementById('password').addEventListener('input', (e) => {
+                checkPasswordStrength(e.target.value);
+            });
+            
+            // Form submission
+            document.getElementById('register-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                const termsAccepted = document.getElementById('terms').checked;
+                
+                // Reset errors
+                document.querySelectorAll('.error-message').forEach(el => {
+                    el.style.display = 'none';
+                });
+                
+                // Validation
+                if (!email || !username || !password || !confirmPassword) {
+                    showError('Please fill in all fields');
+                    return;
+                }
+                
+                if (!termsAccepted) {
+                    showError('You must accept the terms');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    showError('Passwords do not match', 'confirm-error');
+                    return;
+                }
+                
+                if (checkPasswordStrength(password) < 3) {
+                    showError('Password is too weak', 'password-error');
+                    return;
+                }
+                
+                await handleRegistration(email, username, password);
+            });
+            
+            // Check for existing session
+            supabase.auth.getSession().then(({ data: { session } }) => {
+                if (session) {
+                    window.location.href = 'dashboard.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
