@@ -1,1581 +1,291 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Shrine Crypto Casino | Bitcoin & Crypto Gambling</title>
-
-    <link rel="stylesheet" href="
-
+    <title>Shrine Crypto Casino | No KYC Bitcoin & Crypto Gambling</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <style>
-
-        :root {
-
-            --primary: #6a1b9a;
-
-            --secondary: #ffd740;
-
-            --accent: #00e676;
-
-            --dark: #0a0a0a;
-
-            --darker: #050505;
-
-            --gradient: linear-gradient(135deg, var(--primary), var(--accent));
-
-            --glass: rgba(255,255,255,0.05);
-
-            --hero-bg: #1a0a2b;
-
-            --games-bg: #0d0d2b;
-
-            --crypto-bg: #0a2b1a;
-
-        }
-
-        * {
-
-            margin: 0;
-
-            padding: 0;
-
-            box-sizing: border-box;
-
-            ;
-
-        }
-
-        body {
-
-            background: var(--darker);
-
-            ;
-
-            overflow-x: hidden;
-
-        }
-
-        .top-container {
-
-            position: fixed;
-
-            top: 0;
-
-            width: 100%;
-
-            z-index: 1000;
-
-        }
-
-        .announcement-bar {
-
-            background: var(--gradient);
-
-            ;
-
-            padding: 12px 0;
-
-            overflow: hidden;
-
-            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
-
-        }
-
-        .marquee-container {
-
-            display: flex;
-
-            width: 100%;
-
-        }
-
-        .marquee-content {
-
-            white-space: nowrap;
-
-            animation: marquee 20s linear infinite;
-
-            padding-right: 100%;
-
-        }
-
-        @keyframes marquee {
-
-            0% { transform: translateX(100%); }
-
-            100% { transform: translateX(-100%); }
-
-        }
-
-        header {
-
-            background: rgba(10,10,10,0.95);
-
-            backdrop-filter: blur(15px);
-
-            padding: 1rem 2rem;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-
-            gap: 2rem;
-
-        }
-
-        .logo {
-
-            ;
-
-            font-weight: 800;
-
-            background: linear-gradient(45deg, var(--secondary), var(--accent));
-
-            -webkit-background-clip: text;
-
-            ;
-
-            flex-shrink: 0;
-
-        }
-
-        .nav-links {
-
-            display: flex;
-
-            gap: 2.5rem;
-
-            align-items: center;
-
-            flex: 1;
-
-            justify-content: center;
-
-        }
-
-        .nav-links a {
-
-            ;
-
-            text-decoration: none;
-
-            position: relative;
-
-            padding: 0.5rem 0;
-
-            font-weight: 500;
-
-            transition: color 0.3s;
-
-            flex-shrink: 0;
-
-        }
-
-        .nav-links a::after {
-
-            content: '';
-
-            position: absolute;
-
-            width: 0;
-
-            height: 2px;
-
-            bottom: 0;
-
-            left: 0;
-
-            background: var(--secondary);
-
-            transition: width 0.3s;
-
-        }
-
-        .nav-links a:hover::after {
-
-            width: 100%;
-
-        }
-
-        .auth-buttons {
-
-            display: flex;
-
-            gap: 1rem;
-
-            flex-wrap: nowrap;
-
-            flex-shrink: 0;
-
-            justify-content: center; /* Added center alignment */
-
-        }
-
-        .btn {
-
-            padding: 0.8rem 1.8rem;
-
-            border-radius: 50px;
-
-            font-weight: 600;
-
-            cursor: pointer;
-
-            transition: all 0.3s;
-
-            position: relative;
-
-            overflow: hidden;
-
-            border: none;
-
-            text-transform: uppercase;
-
-            letter-spacing: 1px;
-
-            min-width: 120px;
-
-        }
-
-        .btn-primary {
-
-            background: var(--primary);
-
-            ;
-
-            box-shadow: 0 0 25px rgba(106,27,154,0.5);
-
-            border: 2px solid var(--secondary);
-
-        }
-
-        .btn-primary:hover {
-
-            animation: btnGlow 1.5s ease-in-out infinite;
-
-            transform: translateY(-3px);
-
-        }
-
-        .btn-secondary {
-
-            background: transparent;
-
-            border: 2px solid var(--primary);
-
-            ;
-
-        }
-
-        .btn-secondary:hover {
-
-            background: rgba(106,27,154,0.2);
-
-        }
-
-        @keyframes btnGlow {
-
-            0%, 100% { box-shadow: 0 0 25px rgba(106,27,154,0.5); }
-
-            50% { box-shadow: 0 0 40px rgba(106,27,154,0.8); }
-
-        }
-
-        main {
-
-            margin-top: 140px;
-
-            padding: 2rem;
-
-        }
-
-        .hero-section {
-
-            min-height: 90vh;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            text-align: center;
-
-            padding: 4rem 2rem;
-
-            position: relative;
-
-            background: var(--hero-bg);
-
-            border-bottom: 3px solid var(--primary);
-
-        }
-
-        .hero-content {
-
-            max-width: 1200px;
-
-            position: relative;
-
-            z-index: 1;
-
-        }
-
-        .hero-title {
-
-            ;
-
-            margin-bottom: 1.5rem;
-
-            background: linear-gradient(45deg, #fff, var(--secondary));
-
-            -webkit-background-clip: text;
-
-            ;
-
-            text-shadow: 0 0 30px rgba(255,215,64,0.3);
-
-        }
-
-        .hero-subtitle {
-
-            ;
-
-            ;
-
-            margin-bottom: 3rem;
-
-            line-height: 1.6;
-
-        }
-
-        .games-section {
-
-            padding: 6rem 2rem;
-
-            background: var(--games-bg);
-
-            border-bottom: 3px solid var(--primary);
-
-        }
-
-        .section-title {
-
-            text-align: center;
-
-            ;
-
-            margin-bottom: 4rem;
-
-            text-transform: uppercase;
-
-            letter-spacing: 2px;
-
-            position: relative;
-
-            padding-bottom: 1.5rem;
-
-        }
-
-        .section-title::after {
-
-            content: '';
-
-            position: absolute;
-
-            bottom: 0;
-
-            left: 50%;
-
-            transform: translateX(-50%);
-
-            width: 120px;
-
-            height: 3px;
-
-            background: var(--secondary);
-
-        }
-
-        .games-grid {
-
-            display: grid;
-
-            grid-template-columns: repeat(2, 1fr);
-
-            gap: 3rem;
-
-            max-width: 1400px;
-
-            margin: 0 auto;
-
-        }
-
-        .game-card {
-
-            background: var(--glass);
-
-            border-radius: 20px;
-
-            padding: 2.5rem;
-
-            text-align: center;
-
-            transition: all 0.3s;
-
-            border: 1px solid rgba(255,255,255,0.1);
-
-            position: relative;
-
-            overflow: hidden;
-
-            backdrop-filter: blur(10px);
-
-        }
-
-        .game-card::before {
-
-            content: '';
-
-            position: absolute;
-
-            top: -50%;
-
-            left: -50%;
-
-            width: 200%;
-
-            height: 200%;
-
-            background: linear-gradient(45deg, transparent, rgba(255,215,64,0.1), transparent);
-
-            transform: rotate(45deg);
-
-            pointer-events: none;
-
-        }
-
-        .game-card:hover {
-
-            transform: translateY(-10px);
-
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-
-        }
-
-        .game-icon {
-
-            width: 120px;
-
-            height: 120px;
-
-            margin: 0 auto 2rem;
-
-            background: rgba(255,255,255,0.1);
-
-            border-radius: 20px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            ;
-
-            ;
-
-            transition: transform 0.3s;
-
-            position: relative;
-
-        }
-
-        .game-card:hover .game-icon {
-
-            transform: scale(1.1);
-
-        }
-
-        .game-title {
-
-            ;
-
-            margin-bottom: 1.5rem;
-
-            letter-spacing: 1px;
-
-        }
-
-        .game-stats {
-
-            display: flex;
-
-            justify-content: space-around;
-
-            margin: 2.5rem 0;
-
-            gap: 1rem;
-
-        }
-
-        .stat-item {
-
-            text-align: center;
-
-            padding: 1rem;
-
-            background: rgba(0,0,0,0.3);
-
-            border-radius: 10px;
-
-            flex: 1;
-
-        }
-
-        .stat-value {
-
-            ;
-
-            ;
-
-            font-weight: 700;
-
-            ;
-
-            transition: all 0.3s;
-
-        }
-
-        .stat-label {
-
-            ;
-
-            ;
-
-            margin-top: 0.5rem;
-
-            display: block;
-
-        }
-
-        .crypto-section {
-
-            padding: 6rem 2rem;
-
-            background: var(--crypto-bg);
-
-            border-bottom: 3px solid var(--primary);
-
-        }
-
-        .crypto-grid {
-
-            display: grid;
-
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-
-            gap: 2rem;
-
-            max-width: 1400px;
-
-            margin: 0 auto;
-
-        }
-
-        .crypto-card {
-
-            background: var(--glass);
-
-            padding: 2rem;
-
-            border-radius: 15px;
-
-            text-align: center;
-
-            transition: transform 0.3s;
-
-            backdrop-filter: blur(10px);
-
-            border: 1px solid rgba(255,255,255,0.1);
-
-        }
-
-        .crypto-card:hover {
-
-            transform: translateY(-10px);
-
-        }
-
-        .crypto-icon {
-
-            width: 80px;
-
-            height: 80px;
-
-            margin: 0 auto 1.5rem;
-
-            filter: drop-shadow(0 0 10px rgba(255,215,64,0.3));
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            ;
-
-            ;
-
-        }
-
-        .vip-section {
-
-            padding: 6rem 2rem;
-
-            background: #1a0a1a;
-
-            border-bottom: 3px solid var(--primary);
-
-        }
-
-        .vip-tiers {
-
-            display: grid;
-
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 3rem;
-
-            max-width: 1400px;
-
-            margin: 0 auto;
-
-        }
-
-        .vip-card {
-
-            background: var(--glass);
-
-            padding: 2.5rem;
-
-            border-radius: 20px;
-
-            text-align: center;
-
-            position: relative;
-
-            overflow: hidden;
-
-            backdrop-filter: blur(10px);
-
-        }
-
-        .vip-badge {
-
-            width: 80px;
-
-            height: 80px;
-
-            margin: 0 auto 1.5rem;
-
-            background: var(--gradient);
-
-            border-radius: 50%;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            ;
-
-        }
-
-        .bonuses-section {
-
-            padding: 6rem 2rem;
-
-            background: #0a2b2b;
-
-            border-bottom: 3px solid var(--primary);
-
-        }
-
-        .bonus-grid {
-
-            display: grid;
-
-            grid-template-columns: repeat(2, 1fr);
-
-            gap: 3rem;
-
-            max-width: 1400px;
-
-            margin: 0 auto;
-
-        }
-
-        .bonus-card {
-
-            background: var(--glass);
-
-            padding: 2.5rem;
-
-            border-radius: 20px;
-
-            position: relative;
-
-            overflow: hidden;
-
-        }
-
-        .bonus-amount {
-
-            ;
-
-            ;
-
-            margin: 1rem 0;
-
-        }
-
-        .leaderboard-section {
-
-            padding: 6rem 2rem;
-
-            background: #2b0a0a;
-
-            border-bottom: 3px solid var(--primary);
-
-        }
-
-        .leaderboard-table {
-
-            max-width: 1000px;
-
-            margin: 0 auto;
-
-            background: var(--glass);
-
-            border-radius: 15px;
-
-            overflow: hidden;
-
-        }
-
-        .leaderboard-row {
-
-            display: flex;
-
-            padding: 1.2rem 2rem;
-
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-
-        }
-
-        .leaderboard-header {
-
-            background: var(--primary);
-
-            font-weight: 700;
-
-        }
-
-        .rank-cell {
-
-            width: 15%;
-
-            font-weight: 700;
-
-        }
-
-        .player-cell {
-
-            width: 45%;
-
-        }
-
-        .amount-cell {
-
-            width: 40%;
-
-            text-align: right;
-
-            ;
-
-        }
-
-        .support-section {
-
-            padding: 6rem 2rem;
-
-            background: #0a1a2b;
-
-        }
-
-        .support-grid {
-
-            display: grid;
-
-            grid-template-columns: repeat(2, 1fr);
-
-            gap: 4rem;
-
-            max-width: 1400px;
-
-            margin: 0 auto;
-
-        }
-
-        .live-wins {
-
-            position: fixed;
-
-            bottom: 30px;
-
-            right: 30px;
-
-            max-width: 350px;
-
-            z-index: 1000;
-
-            overflow: hidden;
-
-        }
-
-        .win-notification {
-
-            background: rgba(0,0,0,0.9);
-
-            padding: 1rem;
-
-            border-radius: 12px;
-
-            margin: 0.5rem 0;
-
-            border: 1px solid var(--primary);
-
-            transform: translateX(120%);
-
-            animation: slideInOut 5s forwards;
-
-            position: absolute;
-
-            right: 0;
-
-            width: 100%;
-
-            opacity: 0;
-
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-
-            backdrop-filter: blur(5px);
-
-        }
-
-        @keyframes slideInOut {
-
-            0% { transform: translateX(120%); opacity: 0; }
-
-            15% { transform: translateX(0); opacity: 1; }
-
-            85% { transform: translateX(0); opacity: 1; }
-
-            100% { transform: translateX(120%); opacity: 0; }
-
-        }
-
-        .progress-bar {
-
-            height: 3px;
-
-            background: var(--primary);
-
-            width: 0%;
-
-            animation: progress 4s linear forwards;
-
-            margin-bottom: 0.5rem;
-
-        }
-
-        @keyframes progress {
-
-            from { width: 0%; }
-
-            to { width: 100%; }
-
-        }
-
-        @media (max-width: 1024px) {
-
-            .nav-links { gap: 1.5rem; }
-
-            .vip-tiers { grid-template-columns: 1fr; }
-
-            .bonus-grid { grid-template-columns: 1fr; }
-
-        }
-
-        @media (max-width: 768px) {
-
-            .games-grid { grid-template-columns: 1fr; }
-
-            .hero-title { ; }
-
-            .nav-links { display: none; }
-
-            .stat-value { ; }
-
-            .game-card { padding: 1.5rem; }
-
-            .auth-buttons { margin-left: auto; }
-
-            .btn { padding: 0.6rem 1.2rem; }
-
-            .support-grid { grid-template-columns: 1fr; }
-
-        }
-
-        @media (max-width: 480px) {
-
-            .hero-title { ; }
-
-            .section-title { ; }
-
-            .game-icon { width: 80px; height: 80px; }
-
-            .top-container { position: static; }
-
-            header { flex-wrap: wrap; padding: 1rem; }
-
-            .auth-buttons { order: 2; width: 100%; }
-
-            .btn { width: 45%; }
-
-        }
-
-    </style>
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
     <div class="top-container">
-
         <div class="announcement-bar">
-
             <div class="marquee-container">
-
                 <div class="marquee-content">
-
-                    🚀 300% WELCOME BONUS • INSTANT WITHDRAWALS • PROVABLY FAIR GAMES • 24/7 LIVE SUPPORT 🚀
-
-                    🚀 300% WELCOME BONUS • INSTANT WITHDRAWALS • PROVABLY FAIR GAMES • 24/7 LIVE SUPPORT 🚀
-
+                    🚀 NO KYC REQUIRED • 300% WELCOME BONUS • INSTANT WITHDRAWALS • PROVABLY FAIR GAMES • 24/7 LIVE SUPPORT 🚀
+                    🚀 NO KYC REQUIRED • 300% WELCOME BONUS • INSTANT WITHDRAWALS • PROVABLY FAIR GAMES • 24/7 LIVE SUPPORT 🚀
                 </div>
-
             </div>
-
         </div>
-
         <header>
-
             <div class="logo">SHRINE CASINO</div>
-
             <nav class="nav-links">
-
                 <a href="#games">Games</a>
-
                 <a href="#vip">VIP</a>
-
                 <a href="#bonuses">Bonuses</a>
-
                 <a href="#leaderboard">Leaderboard</a>
-
                 <a href="#support">Support</a>
-
             </nav>
-
             <div class="auth-buttons">
-
                 <button class="btn btn-primary">SIGN UP</button>
-
                 <button class="btn btn-secondary">LOGIN</button>
-
             </div>
-
         </header>
-
     </div>
 
     <main>
-
         <section class="hero-section">
-
             <div class="hero-content">
-
-                <h1 class="hero-title">The Ultimate Crypto Gambling Experience</h1>
-
-                <p class="hero-subtitle">Play with Bitcoin, Ethereum, Monero, Solana and more</p>
-
-                <div class="auth-buttons">
-
-                    <button class="btn btn-primary">GET STARTED</button>
-
-                    <button class="btn btn-secondary">LEARN MORE</button>
-
+                <h1 class="hero-title">Anonymous Crypto Gambling</h1>
+                <p class="hero-subtitle">No KYC required • Play with Bitcoin, Ethereum, Monero, Solana and more</p>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Provably Fair</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-bolt"></i>
+                        <span>Instant Payouts</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-user-secret"></i>
+                        <span>No KYC</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-gem"></i>
+                        <span>VIP Rewards</span>
+                    </div>
                 </div>
-
+                <div class="auth-buttons">
+                    <button class="btn btn-primary">PLAY ANONYMOUSLY</button>
+                    <button class="btn btn-secondary">LEARN MORE</button>
+                </div>
             </div>
-
         </section>
 
         <section class="games-section" id="games">
-
-            <h2 class="section-title">Featured Games</h2>
-
+            <h2 class="section-title">Provably Fair Games</h2>
             <div class="games-grid">
-
                 <!-- Mines Game -->
-
                 <div class="game-card" data-aos="fade-up">
-
                     <div class="game-icon"><i class="fas fa-bomb"></i></div>
-
                     <h3 class="game-title">Mines</h3>
-
+                    <p class="game-description">Find treasures without hitting bombs. Up to 1000x multiplier!</p>
                     <div class="game-stats">
-
                         <div class="stat-item">
-
                             <div class="stat-value" data-base="25480">$25,480</div>
-
                             <span class="stat-label">Won Today</span>
-
                         </div>
-
                         <div class="stat-item">
-
                             <div class="stat-value" data-base="2345">2,345</div>
-
                             <span class="stat-label">Players Online</span>
-
                         </div>
-
                     </div>
-
                     <button class="btn btn-primary">PLAY NOW</button>
-
                 </div>
 
                 <!-- Plinko Game -->
-
                 <div class="game-card" data-aos="fade-up" data-aos-delay="100">
-
                     <div class="game-icon"><i class="fas fa-circle-nodes"></i></div>
-
                     <h3 class="game-title">Plinko</h3>
-
+                    <p class="game-description">Drop the ball for massive wins. Up to 5000x multiplier!</p>
                     <div class="game-stats">
-
                         <div class="stat-item">
-
                             <div class="stat-value" data-base="18750">$18,750</div>
-
                             <span class="stat-label">Won Today</span>
-
                         </div>
-
                         <div class="stat-item">
-
                             <div class="stat-value" data-base="1892">1,892</div>
-
                             <span class="stat-label">Players Online</span>
-
                         </div>
-
                     </div>
-
                     <button class="btn btn-primary">PLAY NOW</button>
-
                 </div>
 
                 <!-- Dice Game -->
-
                 <div class="game-card" data-aos="fade-up" data-aos-delay="200">
-
                     <div class="game-icon"><i class="fas fa-dice"></i></div>
-
                     <h3 class="game-title">Dice</h3>
-
+                    <p class="game-description">Predict the dice roll. Simple game with 99% payout!</p>
                     <div class="game-stats">
-
                         <div class="stat-item">
-
                             <div class="stat-value" data-base="42300">$42,300</div>
-
                             <span class="stat-label">Won Today</span>
-
                         </div>
-
                         <div class="stat-item">
-
                             <div class="stat-value" data-base="3102">3,102</div>
-
                             <span class="stat-label">Players Online</span>
-
                         </div>
-
                     </div>
-
                     <button class="btn btn-primary">PLAY NOW</button>
-
                 </div>
 
                 <!-- Blackjack Game -->
-
                 <div class="game-card" data-aos="fade-up" data-aos-delay="300">
-
                     <div class="game-icon">
-
                         <i class="fas fa-club"></i>
-
                         <i class="fas fa-spade" style="position: absolute; transform: rotate(10deg);"></i>
-
                     </div>
-
                     <h3 class="game-title">Blackjack</h3>
-
+                    <p class="game-description">Beat the dealer with 21. Lowest house edge at 0.5%!</p>
                     <div class="game-stats">
-
                         <div class="stat-item">
-
                             <div class="stat-value" data-base="68900">$68,900</div>
-
                             <span class="stat-label">Won Today</span>
-
                         </div>
-
                         <div class="stat-item">
-
                             <div class="stat-value" data-base="1234">1,234</div>
-
                             <span class="stat-label">Players Online</span>
-
                         </div>
-
                     </div>
-
                     <button class="btn btn-primary">PLAY NOW</button>
-
                 </div>
-
             </div>
-
         </section>
 
         <section class="crypto-section" id="crypto">
-
-            <h2 class="section-title">Supported Cryptocurrencies</h2>
-
+            <h2 class="section-title">Anonymous Deposits</h2>
             <div class="crypto-grid">
-
                 <div class="crypto-card">
-
                     <div class="crypto-icon"><i class="fab fa-bitcoin"></i></div>
-
                     <h3>Bitcoin (BTC)</h3>
-
-                    <p>Instant deposits & withdrawals</p>
-
+                    <p>No KYC • Instant deposits & withdrawals</p>
                 </div>
-
                 <div class="crypto-card">
-
                     <div class="crypto-icon"><i class="fab fa-ethereum"></i></div>
-
                     <h3>Ethereum (ETH)</h3>
-
                     <p>ERC-20 network supported</p>
-
                 </div>
-
                 <div class="crypto-card">
-
                     <div class="crypto-icon"><i class="fas fa-coins"></i></div>
-
                     <h3>Monero (XMR)</h3>
-
-                    <p>Private transactions</p>
-
+                    <p>Private anonymous transactions</p>
                 </div>
-
                 <div class="crypto-card">
-
                     <div class="crypto-icon"><i class="fas fa-bolt"></i></div>
-
                     <h3>Solana (SOL)</h3>
-
                     <p>High-speed network</p>
-
                 </div>
-
             </div>
-
         </section>
 
         <section class="vip-section" id="vip">
-
             <h2 class="section-title">VIP Program</h2>
-
             <div class="vip-tiers">
-
                 <div class="vip-card" data-aos="fade-up">
-
                     <div class="vip-badge">I</div>
-
                     <h3>Silver Tier</h3>
-
-                    <p>Daily cashback • Personal account manager • Exclusive bonuses</p>
-
+                    <p>5% Daily cashback • Personal account manager • Exclusive bonuses</p>
+                    <div class="vip-req">$5,000+ wagered</div>
                 </div>
-
                 <div class="vip-card" data-aos="fade-up" data-aos-delay="100">
-
                     <div class="vip-badge">II</div>
-
                     <h3>Gold Tier</h3>
-
-                    <p>Weekly rewards • Higher withdrawal limits • Priority support</p>
-
+                    <p>10% Weekly rewards • Higher withdrawal limits • Priority support</p>
+                    <div class="vip-req">$25,000+ wagered</div>
                 </div>
-
                 <div class="vip-card" data-aos="fade-up" data-aos-delay="200">
-
                     <div class="vip-badge">III</div>
-
                     <h3>Platinum Tier</h3>
-
-                    <p>Monthly luxury gifts • 1% house edge • VIP events access</p>
-
+                    <p>15% Monthly luxury gifts • 1% house edge • VIP events access</p>
+                    <div class="vip-req">$100,000+ wagered</div>
                 </div>
-
             </div>
-
         </section>
 
         <section class="bonuses-section" id="bonuses">
-
             <h2 class="section-title">Exclusive Bonuses</h2>
-
             <div class="bonus-grid">
-
                 <div class="bonus-card" data-aos="fade-right">
-
                     <h3>Welcome Package</h3>
-
                     <div class="bonus-amount">300%</div>
-
                     <p>Up to $3000 + 100 Free Spins</p>
-
+                    <small>5x wagering requirement</small>
+                    <button class="btn btn-primary" style="margin-top: 1.5rem;">CLAIM BONUS</button>
                 </div>
-
                 <div class="bonus-card" data-aos="fade-left">
-
                     <h3>Daily Reload</h3>
-
                     <div class="bonus-amount">50%</div>
-
                     <p>Every deposit • No max limit</p>
-
+                    <small>3x wagering requirement</small>
+                    <button class="btn btn-primary" style="margin-top: 1.5rem;">CLAIM BONUS</button>
                 </div>
-
             </div>
-
         </section>
 
         <section class="leaderboard-section" id="leaderboard">
-
             <h2 class="section-title">Top Winners</h2>
-
             <div class="leaderboard-table">
-
                 <div class="leaderboard-row leaderboard-header">
-
                     <div class="rank-cell">Rank</div>
-
                     <div class="player-cell">Player</div>
-
                     <div class="amount-cell">Amount</div>
-
                 </div>
-
                 <div class="leaderboard-row">
-
                     <div class="rank-cell">#1</div>
-
                     <div class="player-cell">CryptoKing***</div>
-
                     <div class="amount-cell">$42,580</div>
-
                 </div>
-
                 <div class="leaderboard-row">
-
                     <div class="rank-cell">#2</div>
-
                     <div class="player-cell">BitQueen***</div>
-
                     <div class="amount-cell">$38,420</div>
-
                 </div>
-
                 <div class="leaderboard-row">
-
                     <div class="rank-cell">#3</div>
-
                     <div class="player-cell">XMRMaster***</div>
-
                     <div class="amount-cell">$35,150</div>
-
                 </div>
-
+                <div class="leaderboard-row">
+                    <div class="rank-cell">#4</div>
+                    <div class="player-cell">SOLWhale***</div>
+                    <div class="amount-cell">$28,750</div>
+                </div>
+                <div class="leaderboard-row">
+                    <div class="rank-cell">#5</div>
+                    <div class="player-cell">AnonPlayer***</div>
+                    <div class="amount-cell">$24,890</div>
+                </div>
             </div>
-
         </section>
 
         <section class="support-section" id="support">
-
-            <h2 class="section-title">24/7 Support</h2>
-
+            <h2 class="section-title">24/7 Anonymous Support</h2>
             <div class="support-grid">
-
                 <div data-aos="fade-right">
-
                     <h3>Live Chat</h3>
-
-                    <p>Instant assistance from our support team</p>
-
+                    <p>Instant assistance from our support team - no personal info required</p>
                     <button class="btn btn-primary" style="margin-top: 1rem;">START CHAT</button>
-
                 </div>
-
                 <div data-aos="fade-left">
-
-                    <h3>Email Support</h3>
-
+                    <h3>Encrypted Email</h3>
                     <p>support@shrinescasino.com</p>
-
                     <button class="btn btn-secondary" style="margin-top: 1rem;">SEND EMAIL</button>
-
                 </div>
-
             </div>
-
         </section>
-
     </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">SHRINE CASINO</div>
+            <div class="footer-links">
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Provably Fair</a>
+                <a href="#">Responsible Gambling</a>
+            </div>
+            <div class="footer-disclaimer">
+                <p>Shrine Casino is a no-KYC cryptocurrency gambling platform. We do not require personal identification. You must be 18+ to play.</p>
+                <p>© 2023 Shrine Casino. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <div class="live-wins"></div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <script>
-
-        AOS.init({ duration: 1000, once: false, mirror: true });
-
-        const formatter = new Intl.NumberFormat('en-US', {
-
-            style: 'currency',
-
-            currency: 'USD',
-
-            minimumFractionDigits: 0,
-
-            maximumFractionDigits: 0
-
-        });
-
-        function updateNumbers() {
-
-            document.querySelectorAll('.stat-value[data-base]').forEach(el => {
-
-                const isCurrency = el.textContent.includes('$');
-
-                const currentValue = parseInt(el.textContent.replace(/\D/g,''));
-
-                const baseValue = parseInt(el.dataset.base);
-
-                
-
-                const increment = isCurrency 
-
-                    ? Math.floor(Math.random() * 250) + 100
-
-                    : Math.floor(Math.random() * 15) - 2;
-
-                const newValue = currentValue + increment;
-
-                el.textContent = isCurrency 
-
-                    ? formatter.format(newValue)
-
-                    : newValue.toLocaleString();
-
-            });
-
-        }
-
-        document.querySelectorAll('.stat-value[data-base]').forEach(el => {
-
-            const base = parseInt(el.dataset.base);
-
-            const isCurrency = el.closest('.stat-item').querySelector('.stat-label').textContent === 'Won Today';
-
-            const randomized = base + Math.floor(Math.random() * 5000);
-
-            el.textContent = isCurrency 
-
-                ? formatter.format(randomized)
-
-                : randomized.toLocaleString();
-
-        });
-
-        setInterval(updateNumbers, 3000);
-
-        let notificationQueue = [];
-
-        let isNotificationActive = false;
-
-        function createNotification() {
-
-            const games = ['Mines', 'Plinko', 'Dice', 'Blackjack'];
-
-            const amounts = [
-
-                Math.floor(Math.random() * 5000) + 500 + ' BTC',
-
-                Math.floor(Math.random() * 2000) + 200 + ' ETH',
-
-                Math.floor(Math.random() * 10000) + 1000 + ' XMR',
-
-                Math.floor(Math.random() * 50000) + 5000 + ' SOL'
-
-            ];
-
-            
-
-            return {
-
-                game: games[Math.floor(Math.random() * games.length)],
-
-                amount: amounts[Math.floor(Math.random() * amounts.length)]
-
-            };
-
-        }
-
-        function showNotification() {
-
-            if (isNotificationActive) {
-
-                notificationQueue.push(createNotification());
-
-                return;
-
-            }
-
-            isNotificationActive = true;
-
-            const { game, amount } = createNotification();
-
-            const notification = document.createElement('div');
-
-            notification.className = 'win-notification';
-
-            notification.innerHTML = `
-
-                <div class="progress-bar"></div>
-
-                <p>🎉 User****${Math.floor(Math.random()*90+10)} won ${amount} on ${game}!</p>
-
-            `;
-
-            const container = document.querySelector('.live-wins');
-
-            container.innerHTML = '';
-
-            container.appendChild(notification);
-
-            notification.addEventListener('animationend', () => {
-
-                container.innerHTML = '';
-
-                isNotificationActive = false;
-
-                if (notificationQueue.length > 0) {
-
-                    showNotification();
-
-                    notificationQueue.shift();
-
-                }
-
-            });
-
-        }
-
-        setInterval(showNotification, 8000);
-
-        setTimeout(showNotification, 2000);
-
-        document.querySelectorAll('.btn').forEach(btn => {
-
-            btn.addEventListener('mouseenter', () => {
-
-                btn.style.transform = 'translateY(-3px) scale(1.05)';
-
-            });
-
-            btn.addEventListener('mouseleave', () => {
-
-                btn.style.transform = 'translateY(0) scale(1)';
-
-            });
-
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-            anchor.addEventListener('click', function (e) {
-
-                e.preventDefault();
-
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-
-                    behavior: 'smooth'
-
-                });            });
-
-        });
-
-    </script>
-
+    <script src="script.js"></script>
 </body>
-
 </html>
