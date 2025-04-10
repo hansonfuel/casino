@@ -383,6 +383,12 @@ main {
     color: white;
 }
 
+.crypto-icon .solana-icon {
+    width: 40px;
+    height: 40px;
+    fill: white;
+}
+
 .vip-section {
     padding: 6rem 2rem;
     background: #1a0a1a;
@@ -411,14 +417,28 @@ main {
     width: 80px;
     height: 80px;
     margin: 0 auto 1.5rem;
-    background: var(--gradient);
+    background: rgba(0,0,0,0.3);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
+    border: 3px solid;
+}
+
+.vip-card:nth-child(1) .vip-badge {
+    border-color: #C0C0C0;
+    background: rgba(192,192,192,0.1);
+}
+
+.vip-card:nth-child(2) .vip-badge {
+    border-color: #FFD700;
+    background: rgba(255,215,0,0.1);
+}
+
+.vip-card:nth-child(3) .vip-badge {
+    border-color: #b9f2ff;
+    background: rgba(185,242,255,0.1);
 }
 
 .vip-req {
